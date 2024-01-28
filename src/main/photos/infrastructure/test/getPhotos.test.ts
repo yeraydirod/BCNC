@@ -1,7 +1,7 @@
+import { CreatePhotoRepository } from '../../infrastructure/getPhotos.service';
 import MockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
-import { baseUrl } from '../../definitions/baseUrl'
-import { getPhotos } from '../getPhotos';
+import { baseUrl } from '../../../../definitions/baseUrl'
 import { mockPhotos } from './mockPhotos'
 
 const mock = new MockAdapter(axios);
@@ -11,7 +11,8 @@ describe('getPhotos', () => {
 
     mock.onGet(`${baseUrl}/photos`).reply(200, mockPhotos);
 
-    const result = await getPhotos();
+    const photoRepository = CreatePhotoRepository();
+    const result = await photoRepository.getAll();
 
     expect(result).toEqual(mockPhotos);
   });
@@ -19,17 +20,20 @@ describe('getPhotos', () => {
 
   it('should fetch photos from the API filtered by albumId', async () => {
 
-    mock.onGet(`${baseUrl}/photos/${mockPhotos[0].albumId}`).reply(200, mockPhotos);
+    mock.onGet(`${baseUrl}/photos?albumId=${mockPhotos[0].albumId}`).reply(200, mockPhotos);
 
-    const result = await getPhotos();
+    const photoRepository = CreatePhotoRepository();
+    const result = await photoRepository.get(mockPhotos[0].albumId);
 
     expect(result).toEqual(mockPhotos);
   });
 
   it('should handle errors gracefully', async () => {
     mock.onGet(`${baseUrl}/photos`).reply(404, { error: 'Not Found' });
+
+    const photoRepository = CreatePhotoRepository();
   
-    await expect(getPhotos()).rejects.toThrow(
+    await expect(photoRepository.getAll()).rejects.toThrow(
       expect.objectContaining({
         response: expect.objectContaining({
           status: 404,
@@ -41,9 +45,11 @@ describe('getPhotos', () => {
 
 
   it('should handle errors gracefully with param', async () => {
-    mock.onGet(`${baseUrl}/photos/${mockPhotos[0].albumId}`).reply(404, { error: 'Not Found' });
+    mock.onGet(`${baseUrl}/photos?albumId=${mockPhotos[0].albumId}`).reply(404, { error: 'Not Found' });
+
+    const photoRepository = CreatePhotoRepository();
   
-    await expect(getPhotos(mockPhotos[0].albumId)).rejects.toThrow(
+    await expect(photoRepository.get(mockPhotos[0].albumId)).rejects.toThrow(
       expect.objectContaining({
         response: expect.objectContaining({
           status: 404,

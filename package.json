@@ -15,7 +15,14 @@
     "verbose": true,
     "preset": "ts-jest",
     "testEnvironment": "node",
-    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
@@ -29,7 +36,6 @@
     ]
   },
   "dependencies": {
-    "@types/jest": "^29.5.11",
     "axios": "^1.6.7",
     "axios-mock-adapter": "^1.22.0",
     "react": "^18.2.0",
@@ -37,6 +43,7 @@
     "ts-jest": "^29.1.2"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.11",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.14.0",

@@ -1,14 +1,13 @@
 import './App.css'
 
-import { getAlbums } from './services/getAlbums/getAlbums';
-import { getPhotos } from './services/getPhotos/getPhotos';
-import { getUsers } from './services/getUsers/getUsers'
+import { CreateAlbumRepository } from'../src/main/albums/infrastructure/getAlbums.service'
+import { getAlbum } from '../src/main/albums/applications/getAlbum'
 
 function App() {
-  getUsers();
-  getAlbums();
-  getPhotos();
 
+  const repository = CreateAlbumRepository();
+  getAlbum(repository, 3)
+  console.log(getAlbum(repository, 3))
 
   return (
     <>       
