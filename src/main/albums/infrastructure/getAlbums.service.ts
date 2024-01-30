@@ -10,11 +10,11 @@ export function CreateAlbumRepository(): AlbumRepository {
     }
 }
 
-async function get(userId: number): Promise<Album | null> {
+async function get(userId: number): Promise<Album[]> {
     try {
         //https://jsonplaceholder.typicode.com/albums?userId=1
         const response = await axios.get(`${baseUrl}/albums?userId=${userId}`);
-        return response.data as Album;
+        return response.data as Album[];
     } catch (error) {
         console.error('Error fetching Albums:', error);
         throw error;
