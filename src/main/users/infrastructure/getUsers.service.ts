@@ -10,10 +10,14 @@ export function CreateUserRepository(): UserRepository {
     }
 }
 
-
+/**
+ * select user info
+ * @param userId 
+ * @returns User | null
+ */
 async function get(userId: number): Promise<User | null> {
     try {
-        //https://jsonplaceholder.typicode.com/photos?albumId=1
+        //https://jsonplaceholder.typicode.com/users?id=1
         const response = await axios.get(`${baseUrl}/users?id=${userId}`);
         return response.data as User;
     } catch (error) {
@@ -22,6 +26,10 @@ async function get(userId: number): Promise<User | null> {
     }
 }
 
+/**
+ * list of all users available
+ * @returns 
+ */
 async function getAll(): Promise<User[]> {
     try {
         const response = await axios.get(`${baseUrl}/users`);
