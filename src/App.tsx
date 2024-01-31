@@ -1,24 +1,25 @@
 import './App.css'
 
-import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
+import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 
 import AlbumList from './ui/albumListComponent/AlbumList';
 import ButtonAnimatedGradient from './ui/buttonComponent/buttonComponent';
 import PhotoList from './ui/photoListComponent/PhotoList'
+import React from 'react';
 import UserList from './ui/userListComponent/UserList';
 
 function App() {
-
+  const navigate = useNavigate()
   const handleUserClick = (userId: number) => {
-    console.log(`Card clicked! UserId: ${userId}`);
+    navigate(`/albums?userId=${userId}`);
   };
 
   function handleAlbumClick(id: number): void {
-    console.log(`Card clicked! album: ${id}`);
+    navigate(`/photos?id=${id}`);
   }
 
   return (
-    <BrowserRouter>
+    <React.Fragment>
       <section className="layout">
         <div className="header">
           <header>
@@ -34,22 +35,17 @@ function App() {
           </header>
         </div>
         <div className="body">
-          <Switch>
-            <Route path='/' exact>
-              <UserList handleUserClick={handleUserClick} />
-            </Route>
-            <Route path='/albums/:userId?'>
-              <AlbumList handleAlbumClick={handleAlbumClick} />
-            </Route>
-            <Route path='/photos/:userId?'>
-              <PhotoList  />
-            </Route>
-          </Switch>
+          <Routes>
+            <Route path="/" element={<UserList handleUserClick={handleUserClick} />} />
+            <Route path="/albums" element={<AlbumList handleAlbumClick={handleAlbumClick} />} />
+            <Route path="/albums?userId" element={<AlbumList handleAlbumClick={handleAlbumClick} />} />
+            <Route path="/photos" element={<PhotoList />} />
+            <Route path="/photos?id" element={<PhotoList />} />
+          </Routes>
         </div>
-
         <div className="footer">copyright: Yeray Díaz</div>
       </section>
-    </BrowserRouter>
+    </React.Fragment>
   );
 }
 

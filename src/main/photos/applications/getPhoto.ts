@@ -7,6 +7,6 @@ import { PhotoRepository } from '../domain/PhotoRepository'
  * @param albumId 
  * @returns Photo[]
  */
-export async function getPhoto( photoRepository: PhotoRepository, albumId: number): Promise<Photo[]> {
+export async function getPhotos( photoRepository: PhotoRepository, albumId: number): Promise<Photo[]> {
     return photoRepository.get(albumId)
 }
