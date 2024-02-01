@@ -31,7 +31,7 @@ El proyecto actualmente proporciona la posibilidad de visualizar los tres listad
 
 Se han creado test unitarios simples que comprueban la obtención de datos y la correcta visualización de ellos.
 
-El proyecto se encuentra subido en GitHub y cuenta con CI para el despliegue en GitHub Pages para su uso: [Proyecto React BCNC](https://yeraydirod.github.io/)
+El proyecto se encuentra subido en GitHub y cuenta con CI para el despliegue en GitHub Pages para su uso: [Proyecto React BCNC](https://yeraydirod.github.io/BCNC/)
 
 ---
 
